@@ -271,5 +271,5 @@ if __name__ == '__main__':
     print("Admin path: /admin  |  Honeypot: /secret-honeypot\n")
 
     # Bind to all network interfaces
-    app.run(host='0.0.0.0', port=FLASK_PORT, debug=True)
+    app.run(host='0.0.0.0', port=FLASK_PORT, debug=False)
 
