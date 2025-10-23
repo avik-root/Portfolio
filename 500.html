@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>500 | SYSTEM FAILURE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== CORE STYLE ===== */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #080808 0%, #000 100%);
+      color: #00ffff;
+      font-family: 'Share Tech Mono', monospace;
+      overflow: hidden;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: 6rem;
+      font-weight: bold;
+      color: #ff004c;
+      text-shadow: 0 0 25px #ff004c;
+      animation: flicker 3s infinite alternate;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: '500';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparent;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+      animation: glitch-effect 2s infinite linear alternate-reverse;
+    }
+
+    .glitch::before {
+      left: 3px;
+      text-shadow: -2px 0 cyan;
+      animation-delay: 0.2s;
+    }
+
+    .glitch::after {
+      left: -3px;
+      text-shadow: -2px 0 lime;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes glitch-effect {
+      0% { clip: rect(40px, 9999px, 44px, 0); }
+      10% { clip: rect(80px, 9999px, 85px, 0); }
+      20% { clip: rect(10px, 9999px, 14px, 0); }
+      30% { clip: rect(60px, 9999px, 64px, 0); }
+      40% { clip: rect(20px, 9999px, 24px, 0); }
+      50% { clip: rect(70px, 9999px, 74px, 0); }
+      100% { clip: rect(0, 9999px, 0, 0); }
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% { opacity: 1; }
+      20%, 24%, 55% { opacity: 0.3; }
+    }
+
+    .subtitle {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.8);
+      text-align: center;
+      max-width: 600px;
+      animation: fadein 3s ease forwards;
+    }
+
+    .subtitle strong {
+      color: #ff004c;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.6rem;
+      border: 1px solid rgba(255,0,76,0.5);
+      background: rgba(255,0,76,0.1);
+      border-radius: 10px;
+      color: #ff004c;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      background: rgba(255,0,76,0.3);
+      box-shadow: 0 0 25px #ff004c;
+      color: #fff;
+    }
+
+    .terminal-text {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+      color: rgba(255,0,76,0.6);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      animation: fadein 2s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="glitch">500</div>
+  <div class="subtitle">
+    <strong>SYSTEM FAILURE — INTERNAL CRASH DETECTED</strong><br>
+    The server tried to fight back, but it burned itself instead.
+  </div>
+  <a href="/" class="btn"><i class="fas fa-arrow-left"></i> REBOOT SYSTEM</a>
+  <div class="terminal-text">&gt; Critical process terminated. Restart required.</div>
+</body>
+</html>

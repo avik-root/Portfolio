@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <title>/vik | root </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="terminal-border"></div>
+        <div class="terminal">
+            <span id="terminalText"></span><span class="cursor">_</span>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="loading-text" id="loadingText">&gt; INITIALIZING SYSTEM...</div>
+    </div>
+
+    <!-- Loading Screen Particle Wave Background -->
+    <canvas class="particle-wave" id="particleWave"></canvas>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="logo.png" alt="Avik Logo" class="logo-img">
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#journey" class="nav-link">Journey</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="geometric-shapes" id="geometricShapes"></div>
+        <canvas class="particle-network" id="particleCanvas"></canvas>
+        <div class="hero-content">
+            <h1 class="hero-title typewriter">/vik</h1>
+            <p class="hero-subtitle">0.001% means still you've a chance to make it possible.</p>
+            <p class="hero-role">Advanced Penetration Tester | Security Architect</p>
+            <div class="hero-buttons">
+                <a href="500.html" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-outline">Contact Me</a>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="gradient-mesh" id="gradientMesh"></div>
+        <div class="container">
+            <h2 class="section-title fade-in">About Me</h2>
+            <div class="about-content">
+                <div class="about-text slide-left">
+                    <p>I lead cybersecurity initiatives focused on penetration testing, security architecture, and threat intelligence. My work involves guiding teams through complex security assessments, uncovering vulnerabilities, and implementing strategies that strengthen organizational defense.</p>
+                    <p>I take a hands-on approach in testing systems, analyzing threat behavior, and designing scalable security frameworks that prevent real-world attacks. I focus on driving measurable impact—reducing risks, improving resilience, and ensuring every security decision aligns with business goals. Beyond technical execution, I believe in building a proactive security culture. I collaborate across teams to improve awareness, streamline incident response, and integrate security into every layer of technology.</p>
+                </div>
+                <div class="about-image slide-right">
+                    <div class="profile-image">
+                        <img src="https://images.ctfassets.net/4wi85sabst0a/11ZdW0CcT0FncIwDGTLTxi/f6f096a4e143c301fda391eb868a2fd6/1759339863274-3.jpg" alt="Avik Samanta - Profile Photo" class="profile-img">
+                    </div>
+                </div>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card glass-card fade-in">
+                    <div class="stat-number" data-target="10">0</div>
+                    <div class="stat-label">Security Projects</div>
+                </div>
+                <div class="stat-card glass-card fade-in">
+                    <div class="stat-number" data-target="3">0</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-card glass-card fade-in">
+                    <div class="stat-number" data-target="45">0</div>
+                    <div class="stat-label">Vulnerabilities Found</div>
+                </div>
+                <div class="stat-card glass-card fade-in">
+                    <div class="stat-number" data-target="2">0</div>
+                    <div class="stat-label">Security Audits</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="gradient-mesh" id="skillsMesh"></div>
+        <div class="container">
+            <h2 class="section-title fade-in">Skills &amp; Expertise</h2>
+            <div class="skills-container">
+                <div class="skills-category glass-card slide-left">
+                    <h3 class="category-title">Technical Expertise</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Advanced Penetration Testing</span>
+                            <span class="skill-level">83%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="83"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Network Security</span>
+                            <span class="skill-level">78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="78"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Web Application Security</span>
+                            <span class="skill-level">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Hacking</span>
+                            <span class="skill-level">97%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="97"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">CTF</span>
+                            <span class="skill-level">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">IoT development</span>
+                            <span class="skill-level">97%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="97"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Threat Intelligence</span>
+                            <span class="skill-level">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Red Team Operations</span>
+                            <span class="skill-level">94%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="94"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="skills-category glass-card slide-right">
+                    <h3 class="category-title">Professional Tools</h3>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Kali Linux</span>
+                            <span class="skill-level">98%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="98"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Burp Suite</span>
+                            <span class="skill-level">78%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="78"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Metasploit</span>
+                            <span class="skill-level">85%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="85"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Wireshark</span>
+                            <span class="skill-level">80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">ADB</span>
+                            <span class="skill-level">90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Nmap</span>
+                            <span class="skill-level">94%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="94"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Amas</span>
+                            <span class="skill-level">87%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="87"></div>
+                        </div>
+                    </div>
+                    <div class="skill-item">
+                        <div class="skill-header">
+                            <span class="skill-name">Nikto</span>
+                            <span class="skill-level">94%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="94"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="certifications fade-in">
+                <h2 class="category-title">Certifications</h2>
+                <div class="cert-grid">
+                    <div class="cert-badge premium-cert"><a href="https://www.coursera.org/account/accomplishments/professional-cert/5NFNKPTRHEB5">Google Cybersecurity - GOOGLE</a></div>
+                    <div class="cert-badge premium-cert"><a href="https://www.coursera.org/account/accomplishments/verify/8PHL5D3U5FF1">Tools of the Trade: Linux and SQL - GOOGLE</a></div>
+                    <div class="cert-badge premium-cert"><a href="https://www.coursera.org/account/accomplishments/verify/FUO08JYZNC0U">Connect and Protect: Networks and Network Security - GOOGLE</a></div>
+                    <div class="cert-badge premium-cert"><a href="https://www.coursera.org/account/accomplishments/verify/GNG8RCH82599">Blockchain Security - INFOSEC</a></div>
+                    <div class="cert-badge premium-cert"><a href="https://www.coursera.org/account/accomplishments/verify/YQ07FC6SK6LZ">Introduction to Computers and Operating Systems and Security - MICROSOFT</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="section">
+        <canvas class="wave-particles" id="waveParticles"></canvas>
+        <div class="container">
+            <h2 class="section-title fade-in">My Journey</h2>
+            <div class="timeline">
+                <div class="timeline-item slide-left">
+                    <div class="timeline-marker work-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-year">2025</div>
+                        <h3 class="timeline-title">Lead ZeroDay Allinace</h3>
+                        <div class="timeline-org">ZeroDay Allinace</div>
+                        <p class="timeline-desc">Leading the club as a President of ZeroDay Allinace</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item slide-right">
+                    <div class="timeline-marker cert-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-year">2025</div>
+                        <h3 class="timeline-title">Google Cyber Security Professional Certification</h3>
+                        <div class="timeline-org">Google</div>
+                        <p class="timeline-desc">Achieved industry-leading penetration testing certification</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item slide-left">
+                    <div class="timeline-marker work-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-year">2025</div>
+                        <h3 class="timeline-title">IoT Penetration Tester</h3>
+                        <div class="timeline-org">ZeroDay Allinace</div>
+                        <p class="timeline-desc">Conducted sophisticated security assessments and vulnerability research on IoT devices.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item slide-right">
+                    <div class="timeline-marker cert-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-year">2024</div>
+                        <h3 class="timeline-title">Get 5X+ Acknowledgement by Indian Govt.</h3>
+                        <div class="timeline-org">Ministry of Electronics and Information Technology Government of India</div>
+                        <p class="timeline-desc">Acknowledged in multiple advanced penetration testing and got multiple bugs on websites.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item slide-left">
+                    <div class="timeline-marker work-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-year">2024</div>
+                        <h3 class="timeline-title">Ethical Hacker</h3>
+                        <div class="timeline-org">ZeroDay Allinace</div>
+                        <p class="timeline-desc">Started as an ethical hacker position.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item slide-right">
+                    <div class="timeline-marker cert-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-year">2023</div>
+                        <h3 class="timeline-title">B.Tech CSE Specialization on IoT, Cyber Security & Blockchain Tech.</h3>
+                        <div class="timeline-org">Sister Nivedita University</div>
+                        <p class="timeline-desc">Pursuing my B.Tech Degree.</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item slide-left">
+                    <div class="timeline-marker edu-marker"></div>
+                    <div class="timeline-content glass-card">
+                        <div class="timeline-year">2018</div>
+                        <h3 class="timeline-title">Started my Ethical Hacking</h3>
+                        <div class="timeline-org">Own Lab</div>
+                        <p class="timeline-desc">Exploring Cyber Security and the methodology</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="hex-grid" id="hexGrid"></div>
+        <div class="container">
+            <h2 class="section-title fade-in">Featured Projects</h2>
+            
+            <div class="projects-filter fade-in">
+                <button class="filter-btn active" data-filter="all">All Projects</button>
+                <button class="filter-btn" data-filter="red-team">Red Team</button>
+                <button class="filter-btn" data-filter="bug-bounty">Bug Bounty</button>
+                <button class="filter-btn" data-filter="iot">IoT Security</button>
+                <button class="filter-btn" data-filter="malware-detection">Malware Detection</button>
+                <button class="filter-btn" data-filter="ai-ml">AI-ML</button>
+                <!-- <button class="filter-btn" data-filter="">Threat Intelligence</button> -->
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card glass-card fade-in" data-category="red-team">
+                    <div class="project-image">
+                        <img src="logo.png" alt="Network Penetration Project">
+                        <div class="project-overlay">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">MintFiber</h3>
+                        <div class="project-category">Red Team</div>
+                        <div class="project-category"><a href="https://github.com/avik-root/MintFiber.git">Github Link <font color="Green">Public</font></a></div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Automated VAPT tool for comprehensive security assessment identifying critical Active Directory vulnerabilities and achieving domain compromise through advanced attack chains.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag red">Python</span>
+                            <span class="tech-tag green">C++</span>
+                            <span class="tech-tag blue">Bash</span>
+                            <span class="tech-tag green">Nmap</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glass-card fade-in" data-category="iot">
+                    <div class="project-image">
+                        <img src="logo.png" alt="IoT Security Project">
+                        <div class="project-overlay">
+                            <i class="fas fa-wifi"></i>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">WiFiDucky</h3>
+                        <div class="project-category">IoT Security</div>
+                        <div class="project-category"><a href="https://github.com/avik-root/WifiDucky.git">Github Link <font color="RED">Private</font></a></div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">A wireless HID device using ESP8266 and Leonardo Pro micro arduino. Helps to attack a device remotely and execute HID rubber ducky paylaod. Works on Windows, macOS and Linux.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag green">C++</span>
+                            <span class="tech-tag cyan">UART</span>
+                            <span class="tech-tag red">HID</span>
+                            <span class="tech-tag green">Html+css</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card fade-in" data-category="iot">
+                    <div class="project-image">
+                        <img src="logo.png" alt="Zero-Day Research Project">
+                        <div class="project-overlay">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">Druti</h3>
+                        <div class="project-category">IoT</div>
+                        <div class="project-category"><a href="https://github.com/avik-root/Druti-I.git">Github Link <font color="RED">Private</font></a></div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">An ESP32-LoRa based communication system. High-range wireless communication system.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag red">ESP32-LoRa</span>
+                            <span class="tech-tag cyan">C++</span>
+                            <span class="tech-tag green">HTML</span>
+                            <span class="tech-tag red">CSS+JS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glass-card fade-in" data-category="bug-bounty">
+                    <div class="project-image">
+                        <img src="logo.png" alt="Cloud Security Project">
+                        <div class="project-overlay">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">Blind-Header</h3>
+                        <div class="project-category">Bug Bounty</div>
+                        <div class="project-category"><a href="https://github.com/avik-root/Blind-Header.git">Github Link <font color="RED">Public</font></a></div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">It's an open source bug hunting tool for finding missing headers on a website. Check clickjacking vulnerabilty and shows the report.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag cyan">flask</span>
+                            <span class="tech-tag green">python</span>
+                            <span class="tech-tag red">html</span>
+                            <span class="tech-tag green">css</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glass-card fade-in" data-category="ai-ml">
+                    <div class="project-image">
+                        <img src="logo.png" alt="Banking Security Project">
+                        <div class="project-overlay">
+                            <i class="fas fa-university"></i>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">Predictopedia</h3>
+                        <div class="project-category">ML Prediction</div>
+                        <div class="project-category"><a href="https://github.com/avik-root/Predictopedia.git">Github Link <font color="RED">Private</font></a></div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">Predictopedia is an open source tool for predicting data from a CSV file. It's offer Clustering, Regression and Classification. Check more on github.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag cyan">falsk</span>
+                            <span class="tech-tag red">pyhton</span>
+                            <span class="tech-tag cyan">HTML</span>
+                            <span class="tech-tag green">CSS+js</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card glass-card fade-in" data-category="malware-detection">
+                    <div class="project-image">
+                        <img src="weguard.jpg" alt="Malware Analysis Project">
+                        <div class="project-overlay">
+                            <i class="fas fa-virus"></i>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">W3Guard</h3>
+                        <div class="project-category">Malware Detection</div>
+                        <div class="project-category"><a href="https://github.com/avik-root/W3Guard.git">Github Link <font color="Green">Public</font></a></div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">A web-based phishing detection. URL scanning and after analyzing the url it shows the url is safe or not.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag red">flask</span>
+                            <span class="tech-tag cyan">python</span>
+                            <span class="tech-tag green">HTML+CSS</span>
+                            <span class="tech-tag red">API</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card glass-card fade-in" data-category="iot">
+                    <div class="project-image">
+                        <img src="logo.png" alt="Zero-Day Research Project">
+                        <div class="project-overlay">
+                            <i class="fas fa-code"></i>
+                        </div>
+                    </div>
+                    <div class="project-header">
+                        <h3 class="project-title">Snake Game on IoT</h3>
+                        <div class="project-category">IoT</div>
+                        <div class="project-category"><a href="https://github.com/avik-root/Snakie.git">Github Link <font color="RED">Private</font></a></div>
+                    </div>
+                    <div class="project-body">
+                        <p class="project-desc">A Retro game on using SPI 2.24" OLED display and nodemcu[ESP8266]. Wireless controlling system with full of fun game.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag red">C++</span>
+                            <span class="tech-tag cyan">HTML</span>
+                            <span class="tech-tag green">CSS</span>
+                            <span class="tech-tag red">JS</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Connect With Me</h2>
+            <div class="social-grid">
+                <a href="https://github.com/avik-root/" class="social-link fade-in" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/avik" class="social-link fade-in" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="404.html" class="social-link fade-in" target="_blank">
+                    <i class="fas fa-map-marker-alt"></i>
+                </a>
+                <a href="https://instagram.com/avik__samanta/" class="social-link fade-in" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="https://www.facebook.com/aviksamantal.14.24mrandmisssss" class="social-link fade-in" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+
+                <a href="mailto:aviksamantaofficial@gmail.com" class="social-link fade-in" target="_blank">
+                    <i class="fab fa-google"></i>
+                </a>
+
+                <a href="tel:+6XXXXXXXX0" class="social-link fade-in" target="_blank">
+                    <i class="fas fa-phone-alt"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+<!-- Contact Section -->
+<section id="contact" class="section" style="position: relative; overflow: hidden;">
+  <canvas class="interactive-particles" id="interactiveParticles"></canvas>
+  <div class="container">
+    <h2 class="section-title fade-in">Get In Touch</h2>
+
+    <div class="contact-form" style="position: relative; width: 100%; max-width: 900px; margin: 0 auto;">
+      <h3 style="color: var(--accent-cyan); margin-bottom: 2rem; font-family: 'Orbitron', sans-serif;"></h3>
+
+      <div class="iframe-container" style="position: relative; width: 100%; padding-top: 130%; overflow: hidden; border-radius: 12px;">
+        <iframe 
+          src="https://docs.google.com/forms/d/e/1FAIpQLScQcWjXMBVy8hXxqOPcDX5HOuIdAGlE04ENtct0cFiIcDM4AQ/viewform?embedded=true" 
+          frameborder="0" 
+          marginheight="0" 
+          marginwidth="0"
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+          Loading…
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section 
+<section id="contact" class="section">
+    <div class="contact-container">
+          Contact Info Only 
+      <div class="contact-info slide-left">
+        <h3 style="color: var(--accent-cyan); margin-bottom: 2rem; font-family: 'Orbitron', sans-serif;">
+          Contact Information
+        </h3>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Email</h4>
+            <p>avik@vikcyber.security</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Phone</h4>
+            <p>+91 98765 43210</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="contact-details">
+            <h4>Location</h4>
+            <p>India</p>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon">
+            <i class="fas fa-key"></i>
+          </div>
+          <div class="contact-details">
+            <h4>PGP Key</h4>
+            <p>Available upon request</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<section class="section">
+        <div class="container">
+            <h2 class="section-title fade-in">Thank You</h2>
+            </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 - Avik Samanta | All rights reserved.</p>
+            <p style="margin-top: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">Securing the digital frontier through advanced threat intelligence and penetration testing.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

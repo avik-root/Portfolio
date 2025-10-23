@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 | System Breached</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* ===== CORE STYLE ===== */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at center, #050505 0%, #000 100%);
+      color: #00ffff;
+      font-family: 'Share Tech Mono', monospace;
+      overflow: hidden;
+    }
+
+    .glitch {
+      position: relative;
+      font-size: 7rem;
+      font-weight: bold;
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff;
+      animation: flicker 3s infinite alternate;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: 'It\'s 404 Bro';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: #00ffff;
+      background: transparent;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+      animation: glitch-effect 2.5s infinite linear alternate-reverse;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation-delay: 0.2s;
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 blue;
+      animation-delay: 0.4s;
+    }
+
+    @keyframes glitch-effect {
+      0% {
+        clip: rect(40px, 9999px, 44px, 0);
+      }
+      5% {
+        clip: rect(85px, 9999px, 90px, 0);
+      }
+      10% {
+        clip: rect(20px, 9999px, 24px, 0);
+      }
+      15% {
+        clip: rect(60px, 9999px, 64px, 0);
+      }
+      20% {
+        clip: rect(10px, 9999px, 14px, 0);
+      }
+      25% {
+        clip: rect(70px, 9999px, 74px, 0);
+      }
+      100% {
+        clip: rect(0, 9999px, 0, 0);
+      }
+    }
+
+    @keyframes flicker {
+      0%, 18%, 22%, 25%, 53%, 57%, 100% {
+        opacity: 1;
+      }
+      20%, 24%, 55% {
+        opacity: 0.2;
+      }
+    }
+
+    .subtitle {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      letter-spacing: 2px;
+      color: rgba(0, 255, 255, 0.8);
+      animation: fadein 3s ease forwards;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      margin-top: 2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.6rem;
+      border: 1px solid rgba(0,255,255,0.5);
+      background: rgba(0,255,255,0.1);
+      border-radius: 10px;
+      color: #00ffff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(8px);
+    }
+
+    .btn:hover {
+      transform: scale(1.08);
+      background: rgba(0,255,255,0.3);
+      box-shadow: 0 0 20px #00ffff;
+      color: #fff;
+    }
+
+    .terminal-text {
+      position: absolute;
+      bottom: 15px;
+      width: 100%;
+      text-align: center;
+      color: rgba(0,255,255,0.4);
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      animation: fadein 2s ease forwards;
+    }
+  </style>
+</head>
+<body>
+  <div class="glitch">It's 404 Bro</div>
+  <div class="subtitle">You want to try that again? Go ahead — we’ll enjoy the trace.</div>
+  <a href="/" class="btn"><i class="fas fa-arrow-left"></i> RETURN TO BASE</a>
+  <div class="terminal-text">&gt; Access Denied. Attempt Logged. Tracing Source...</div>
+</body>
+</html>

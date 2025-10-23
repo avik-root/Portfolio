@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>400 — Bad Request</title>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Space+Mono:wght@400;700&display=swap');
+
+    body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle at center, #020617 0%, #000 100%);
+        color: #00ffff;
+        font-family: 'Space Mono', monospace;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        text-align: center;
+    }
+
+    h1 {
+        font-size: 5rem;
+        font-family: 'Orbitron', sans-serif;
+        color: #00ffff;
+        text-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+        color: #00ffaa;
+        margin: 10px 0 30px;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+    }
+
+    p {
+        max-width: 600px;
+        color: #aafafc;
+        line-height: 1.6;
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .glitch {
+        font-size: 6rem;
+        color: #00ffff;
+        position: relative;
+        animation: glitch 1s infinite;
+    }
+
+    @keyframes glitch {
+        0% { text-shadow: 2px 2px #00ffaa, -2px -2px #ff00aa; }
+        20% { text-shadow: -2px 2px #ff00aa, 2px -2px #00ffaa; }
+        40% { text-shadow: 2px -2px #00ffaa, -2px 2px #ff00aa; }
+        60% { text-shadow: -1px 0 #ff00aa, 1px 0 #00ffaa; }
+        80% { text-shadow: 1px -1px #00ffaa, -1px 1px #ff00aa; }
+        100% { text-shadow: 0 0 #00ffff, 0 0 #00ffff; }
+    }
+
+    .terminal {
+        background: rgba(0, 255, 255, 0.05);
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        border-radius: 10px;
+        padding: 1.5rem 2rem;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
+        max-width: 650px;
+        font-size: 1rem;
+        color: #0ff;
+    }
+
+    .btn {
+        display: inline-block;
+        padding: 0.8rem 2rem;
+        margin-top: 2rem;
+        border: 2px solid #00ffff;
+        color: #00ffff;
+        text-decoration: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+
+    .btn:hover {
+        background: #00ffff;
+        color: #000;
+        box-shadow: 0 0 20px #00ffff;
+        transform: scale(1.05);
+    }
+</style>
+</head>
+<body>
+    <h1 class="glitch">400</h1>
+    <h2>Bad Request — Access Denied</h2>
+    <div class="terminal">
+        <p><strong>Warning:</strong> Unauthorized or malformed request detected.</p>
+        <p>Protocol integrity check failed.<br>System automatically rejected your request.</p>
+        <p>Next time, try following the rules — not breaking them.</p>
+    </div>
+    <a href="/" class="btn">Return to Mainframe</a>
+</body>
+</html>
