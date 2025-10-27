@@ -791,3 +791,4 @@ HAPPY HALLOWEEN 2025!
 
   typeWriter();
 });
+
