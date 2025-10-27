@@ -2425,3 +2425,39 @@ body {
         font-size: 1.8rem;
     }
 }
+/* ASCII Container */
+.ascii-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 30px 0;
+  overflow: hidden; /* Removes scrollbar */
+  background: transparent !important; /* Removes blur */
+  backdrop-filter: none !important; /* Removes inherited blur */
+}
+
+/* ASCII Art */
+.ascii-art {
+  font-family: 'Share Tech Mono', monospace;
+  color: #00ffcc;
+  font-size: 8px;
+  line-height: 1;
+  text-align: center;
+  text-shadow: 0 0 8px #00ffcc, 0 0 15px #00ffcc;
+  white-space: pre;
+  overflow: hidden; /* No scroll */
+  user-select: none;
+  display: inline-block;
+  max-width: 100%;
+}
+
+/* Mobile Fix */
+@media (max-width: 768px) {
+  .ascii-art {
+    font-size: 4px;
+    white-space: pre-wrap; /* Wrap ASCII */
+    word-wrap: break-word;
+    text-align: center;
+  }
+}
