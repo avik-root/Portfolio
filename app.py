@@ -24,8 +24,17 @@ import logging
 import argparse
 import hmac
 from functools import wraps
+from typing import Optional
 
-from flask import Flask, request, send_from_directory, abort, make_response
+from flask import (
+    Flask,
+    request,
+    send_from_directory,
+    abort,
+    make_response,
+    render_template,
+)
+from werkzeug.utils import safe_join
 
 # third-party libs
 import bcrypt
@@ -39,15 +48,19 @@ load_dotenv()  # load environment variables from .env
 # -------------------------------
 # Configuration (from .env or defaults)
 # -------------------------------
-STATIC_FOLDER = '.'
-LOG_FILE = 'admin_access.log'
+# Expect a standard Flask layout:
+#  - static files in ./static
+#  - HTML templates in ./templates
+STATIC_FOLDER = os.getenv('STATIC_FOLDER', 'static')
+TEMPLATE_FOLDER = os.getenv('TEMPLATE_FOLDER', 'templates')
+LOG_FILE = os.getenv('LOG_FILE', 'admin_access.log')
 
 ADMIN_USER = os.getenv('ADMIN_USER', 'admin')
 ADMIN_PW_HASH_RAW = os.getenv('ADMIN_PW_HASH', None)  # expected bcrypt hash string
 FLASK_PORT = int(os.getenv('FLASK_PORT', '3000'))
 
 # Convert ADMIN_PW_HASH to bytes if provided
-ADMIN_PW_HASH = ADMIN_PW_HASH_RAW.encode('utf-8') if ADMIN_PW_HASH_RAW else None
+ADMIN_PW_HASH: Optional[bytes] = ADMIN_PW_HASH_RAW.encode('utf-8') if ADMIN_PW_HASH_RAW else None
 
 # Rate limiting / lockout parameters (tweak as needed)
 LOCKOUT_THRESHOLD = int(os.getenv('LOCKOUT_THRESHOLD', '5'))
@@ -58,11 +71,19 @@ RATE_LIMIT_MAX = int(os.getenv('RATE_LIMIT_MAX', '15'))
 # -------------------------------
 # App & logging
 # -------------------------------
-app = Flask(__name__, static_folder=STATIC_FOLDER, static_url_path='')
-logging.basicConfig(filename=LOG_FILE, level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(message)s')
+app = Flask(__name__, static_folder=STATIC_FOLDER, template_folder=TEMPLATE_FOLDER)
 
-# In-memory stores (demo only)
+# Logging both to file and console
+logger = logging.getLogger('server')
+logger.setLevel(logging.INFO)
+file_handler = logging.FileHandler(LOG_FILE)
+file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)s %(message)s'))
+logger.addHandler(file_handler)
+logger.addHandler(stream_handler)
+
+# In-memory stores (demo only) - OK for small single-process deployments
 failed_attempts = {}
 lockouts = {}
 rate_windows = {}
@@ -72,8 +93,9 @@ rate_windows = {}
 # -------------------------------
 def client_ip():
     """Return best-effort client IP (honors X-Forwarded-For if present)."""
-    if request.headers.get('X-Forwarded-For'):
-        return request.headers.get('X-Forwarded-For').split(',')[0].strip()
+    xff = request.headers.get('X-Forwarded-For')
+    if xff:
+        return xff.split(',')[0].strip()
     return request.remote_addr or 'unknown'
 
 def is_locked(ip):
@@ -96,7 +118,7 @@ def record_failed(ip):
     recent = [t for t in failed_attempts[ip] if now - t < LOCKOUT_PERIOD]
     if len(recent) >= LOCKOUT_THRESHOLD:
         lockouts[ip] = now + LOCKOUT_PERIOD
-        logging.warning(f"LOCKOUT set for {ip} until {lockouts[ip]}")
+        logger.warning(f"LOCKOUT set for {ip} until {lockouts[ip]}")
 
 def rate_limit_ok(ip):
     now = time.time()
@@ -109,10 +131,11 @@ def rate_limit_ok(ip):
 def check_password(plain_password: str) -> bool:
     """Return True if plain_password matches ADMIN_PW_HASH (bcrypt)."""
     try:
-        if ADMIN_PW_HASH is None:
+        if ADMIN_PW_HASH is None or plain_password is None:
             return False
         return bcrypt.checkpw(plain_password.encode('utf-8'), ADMIN_PW_HASH)
-    except Exception:
+    except Exception as exc:
+        logger.exception("Password check error")
         return False
 
 # -------------------------------
@@ -125,12 +148,12 @@ def require_basic_auth(view_func):
 
         # Rate-limit early
         if not rate_limit_ok(ip):
-            logging.warning(f"RATE_LIMIT {ip} path={request.path}")
+            logger.warning(f"RATE_LIMIT {ip} path={request.path}")
             return make_response("Too many requests. Slow down.", 429)
 
         # Lockout check
         if is_locked(ip):
-            logging.warning(f"LOCKED_ATTEMPT {ip} path={request.path}")
+            logger.warning(f"LOCKED_ATTEMPT {ip} path={request.path}")
             return make_response("Temporarily blocked due to repeated failed attempts.", 403)
 
         auth = request.authorization
@@ -139,17 +162,17 @@ def require_basic_auth(view_func):
             resp.headers['WWW-Authenticate'] = 'Basic realm="Admin Area"'
             return resp
 
-        username_ok = hmac.compare_digest(auth.username or '', ADMIN_USER)
+        # Safe constant-time comparisons
+        username_ok = hmac.compare_digest((auth.username or '').encode('utf-8'), ADMIN_USER.encode('utf-8'))
         password_ok = check_password(auth.password or '')
 
         if username_ok and password_ok:
-            logging.info(f"ADMIN_LOGIN_SUCCESS ip={ip} user={auth.username} path={request.path}")
+            logger.info(f"ADMIN_LOGIN_SUCCESS ip={ip} user={auth.username} path={request.path}")
             # reset failed attempts for this ip
-            if ip in failed_attempts:
-                del failed_attempts[ip]
+            failed_attempts.pop(ip, None)
             return view_func(*args, **kwargs)
         else:
-            logging.warning(f"ADMIN_LOGIN_FAIL ip={ip} user={auth.username} path={request.path}")
+            logger.warning(f"ADMIN_LOGIN_FAIL ip={ip} user={auth.username} path={request.path}")
             record_failed(ip)
             resp = make_response('Invalid credentials', 401)
             resp.headers['WWW-Authenticate'] = 'Basic realm="Admin Area"'
@@ -161,56 +184,99 @@ def require_basic_auth(view_func):
 # -------------------------------
 @app.route('/')
 def index():
-    return send_from_directory(STATIC_FOLDER, 'index.html')
-
-@app.route('/<path:path>')
-def serve_static(path):
-    # basic sanitization
-    if '..' in path or path.startswith('/'):
-        abort(400)
-
-    # explicit index mapping (single-page)
-    if path in ('', 'index.html'):
-        return send_from_directory(STATIC_FOLDER, 'index.html')
-
-    # single-page: any other .html request is bad
-    if path.endswith('.html') and path != 'index.html':
-        abort(400)
-
-    # serve file if exists
-    if os.path.exists(os.path.join(STATIC_FOLDER, path)):
-        return send_from_directory(STATIC_FOLDER, path)
-
-    abort(404)
+    # Prefer templates/index.html so Jinja can be used if needed.
+    try:
+        return render_template('index.html')
+    except Exception:
+        # fallback: serve static index if template missing
+        index_path = os.path.join(app.static_folder or STATIC_FOLDER, 'index.html')
+        if os.path.exists(index_path):
+            return send_from_directory(app.static_folder, 'index.html')
+        abort(404)
 
 @app.route('/favicon.ico')
 def favicon():
-    if os.path.exists(os.path.join(STATIC_FOLDER, 'favicon.ico')):
-        return send_from_directory(STATIC_FOLDER, 'favicon.ico')
+    # serve from static/favicon/favicon.ico if present
+    favicon_path = os.path.join(app.static_folder or STATIC_FOLDER, 'favicon', 'favicon.ico')
+    if os.path.exists(favicon_path):
+        return send_from_directory(os.path.join(app.static_folder, 'favicon'), 'favicon.ico')
     abort(404)
 
 @app.route('/admin')
 @require_basic_auth
 def admin_page():
-    return send_from_directory(STATIC_FOLDER, 'admin.html')
+    # Admin HTML should be in templates/admin.html for proper separation.
+    try:
+        return render_template('admin.html')
+    except Exception:
+        # security: avoid serving arbitrary files; don't expose filesystem.
+        abort(404)
 
 @app.route('/secret-honeypot')
 def honeypot():
     ip = client_ip()
     ua = request.headers.get('User-Agent', '')
-    logging.warning(f"HONEYPOT_HIT ip={ip} ua={ua} path={request.path}")
+    logger.warning(f"HONEYPOT_HIT ip={ip} ua={ua} path={request.path}")
     return ("<h1>Access Denied</h1><p>This area is monitored.</p>", 403)
+
+# Serve static assets under /static/<path:...>
+@app.route('/static/<path:filename>')
+def static_files(filename):
+    # Prevent directory traversal with safe_join
+    try:
+        # safe_join will raise if illegal
+        safe_join(app.static_folder, filename)
+    except Exception:
+        abort(400)
+    full_path = os.path.join(app.static_folder or STATIC_FOLDER, filename)
+    if os.path.exists(full_path) and os.path.isfile(full_path):
+        return send_from_directory(app.static_folder, filename)
+    abort(404)
+
+# Optional: serve specific top-level files (images, etc.) from project root safely
+@app.route('/assets/<path:filename>')
+def assets(filename):
+    # map to static/assets if you want another alias -- safe_join to validate
+    try:
+        safe_join(app.static_folder, filename)
+    except Exception:
+        abort(400)
+    full_path = os.path.join(app.static_folder or STATIC_FOLDER, filename)
+    if os.path.exists(full_path) and os.path.isfile(full_path):
+        return send_from_directory(app.static_folder, filename)
+    abort(404)
+
+# Generic catch-all for other top-level pages -- be strict
+@app.route('/<path:path>')
+def serve_other(path):
+    # disallow serving arbitrary .html files from anywhere
+    if '..' in path or path.startswith('/'):
+        abort(400)
+    # disallow direct .html except index/admin (handled above)
+    if path.endswith('.html'):
+        abort(400)
+    # try to serve from static folder if exists
+    candidate = os.path.join(app.static_folder or STATIC_FOLDER, path)
+    if os.path.exists(candidate) and os.path.isfile(candidate):
+        return send_from_directory(app.static_folder, path)
+    abort(404)
 
 # -------------------------------
 # Error handlers
 # -------------------------------
 @app.errorhandler(400)
 def bad_request(e):
-    return send_from_directory(STATIC_FOLDER, '400.html'), 400
+    try:
+        return render_template('400.html'), 400
+    except Exception:
+        return ("Bad request", 400)
 
 @app.errorhandler(404)
 def not_found(e):
-    return send_from_directory(STATIC_FOLDER, '404.html'), 404
+    try:
+        return render_template('404.html'), 404
+    except Exception:
+        return ("Not Found", 404)
 
 @app.errorhandler(429)
 def too_many(e):
@@ -218,7 +284,10 @@ def too_many(e):
 
 @app.errorhandler(500)
 def internal_error(e):
-    return send_from_directory(STATIC_FOLDER, '500.html'), 500
+    try:
+        return render_template('500.html'), 500
+    except Exception:
+        return ("Internal Server Error", 500)
 
 # -------------------------------
 # CLI helper: generate bcrypt hash
@@ -270,6 +339,5 @@ if __name__ == '__main__':
     print(f"   • LAN IP:    http://{lan_ip}:{FLASK_PORT}")
     print("Admin path: /admin  |  Honeypot: /secret-honeypot\n")
 
-    # Bind to all network interfaces
-    app.run(host='0.0.0.0', port=FLASK_PORT, debug=False)
-
+    # Bind to all network interfaces. Turn debug off in production!
+    app.run(host='0.0.0.0', port=FLASK_PORT, debug=True)

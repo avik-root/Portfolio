@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
     <title>/vik | root </title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon/favicon.ico') }}">
 </head>
 <body>
     <!-- Loading Screen -->
@@ -31,7 +31,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="#" class="logo">
-                <img src="logo.png" alt="Avik Logo" class="logo-img">
+                <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Avik Logo" class="logo-img">
             </a>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="#home" class="nav-link active">Home</a></li>
@@ -56,7 +56,7 @@
             <p class="hero-subtitle">0.001% means still you've a chance to make it possible.</p>
             <p class="hero-role">Advanced Penetration Tester | Security Architect</p>
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="500.html" class="btn btn-primary">View Projects</a>
                 <a href="#contact" class="btn btn-outline">Contact Me</a>
             </div>
         </div>
@@ -372,7 +372,7 @@
             <div class="projects-grid">
                 <div class="project-card glass-card fade-in" data-category="red-team">
                     <div class="project-image">
-                        <img src="logo.png" alt="Network Penetration Project">
+                        <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="MintFiber">
                         <div class="project-overlay">
                             <i class="fas fa-network-wired"></i>
                         </div>
@@ -395,7 +395,7 @@
                 
                 <div class="project-card glass-card fade-in" data-category="iot">
                     <div class="project-image">
-                        <img src="logo.png" alt="IoT Security Project">
+                        <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="WiFiDucky">
                         <div class="project-overlay">
                             <i class="fas fa-wifi"></i>
                         </div>
@@ -418,9 +418,9 @@
 
                 <div class="project-card glass-card fade-in" data-category="iot">
                     <div class="project-image">
-                        <img src="logo.png" alt="Zero-Day Research Project">
+                        <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Druti">
                         <div class="project-overlay">
-                            <i class="fas fa-code"></i>
+                            <i class="fas fa-phone"></i>
                         </div>
                     </div>
                     <div class="project-header">
@@ -441,7 +441,7 @@
                 
                 <div class="project-card glass-card fade-in" data-category="bug-bounty">
                     <div class="project-image">
-                        <img src="logo.png" alt="Cloud Security Project">
+                        <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Blind-Header">
                         <div class="project-overlay">
                             <i class="fas fa-cloud"></i>
                         </div>
@@ -464,9 +464,9 @@
                 
                 <div class="project-card glass-card fade-in" data-category="ai-ml">
                     <div class="project-image">
-                        <img src="logo.png" alt="Banking Security Project">
+                        <img src="{{ url_for('static', filename='images/projects/m.jpg') }}" alt="Predictopedia">
                         <div class="project-overlay">
-                            <i class="fas fa-university"></i>
+                            <i class="fas fa-brain"></i>
                         </div>
                     </div>
                     <div class="project-header">
@@ -487,7 +487,7 @@
                 
                 <div class="project-card glass-card fade-in" data-category="malware-detection">
                     <div class="project-image">
-                        <img src="weguard.jpg" alt="Malware Analysis Project">
+                        <img src="{{ url_for('static', filename='images/projects/weguard.jpg') }}" alt="W3Guard">
                         <div class="project-overlay">
                             <i class="fas fa-virus"></i>
                         </div>
@@ -510,7 +510,7 @@
 
                 <div class="project-card glass-card fade-in" data-category="iot">
                     <div class="project-image">
-                        <img src="logo.png" alt="Zero-Day Research Project">
+                        <img src="{{ url_for('static', filename='images/logo/logo.png') }}" alt="Snake Game on IoT">
                         <div class="project-overlay">
                             <i class="fas fa-code"></i>
                         </div>
@@ -543,10 +543,10 @@
                 <a href="https://github.com/avik-root/" class="social-link fade-in" target="_blank">
                     <i class="fab fa-github"></i>
                 </a>
-                <a href="https://www.linkedin.com/in/avik-samanta-root/" class="social-link fade-in" target="_blank">
+                <a href="https://www.linkedin.com/in/avik" class="social-link fade-in" target="_blank">
                     <i class="fab fa-linkedin"></i>
                 </a>
-                <a href="/404.html" class="social-link fade-in" target="_blank">
+                <a href="404.html" class="social-link fade-in" target="_blank">
                     <i class="fas fa-map-marker-alt"></i>
                 </a>
                 <a href="https://instagram.com/avik__samanta/" class="social-link fade-in" target="_blank">
@@ -590,7 +590,7 @@
     </div>
   </div>
 </section>
-    
+
 <section class="section">
         <div class="container">
             <h2 class="section-title fade-in">Thank You</h2>
@@ -609,6 +609,6 @@
         <i class="fas fa-arrow-up"></i>
     </button>
 
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
